@@ -763,6 +763,8 @@ instantiate_pattern(FcPattern *pattern, double req_pt_size, double req_px_size,
     char features[256] = {0};
 
 #if defined(FCFT_HAVE_HARFBUZZ)
+    font->hb_feats_count = 0;
+
     font->hb_font = hb_ft_font_create_referenced(ft_face);
     if (font->hb_font == NULL) {
         LOG_ERR("%s: failed to instantiate harfbuzz font", face_file);
@@ -775,32 +777,32 @@ instantiate_pattern(FcPattern *pattern, double req_pt_size, double req_px_size,
         goto err_hb_font_destroy;
     }
 
-    for (font->hb_feats_count = 0; font->hb_feats_count < ALEN(font->hb_feats); ) {
+    for (size_t feat_no = 0; feat_no < ALEN(font->hb_feats); feat_no++) {
         FcChar8 *fc_feat;
         if (FcPatternGetString(
-                pattern, FC_FONT_FEATURES,
-                font->hb_feats_count, &fc_feat) != FcResultMatch)
+            pattern, FC_FONT_FEATURES, feat_no, &fc_feat) != FcResultMatch)
         {
             break;
         }
 
         hb_feature_t *feat = &font->hb_feats[font->hb_feats_count];
 
-        if (hb_feature_from_string((const char *)fc_feat, -1, feat)) {
-            const char tag[4] = {
-                (feat->tag >> 24) & 0xff,
-                (feat->tag >> 16) & 0xff,
-                (feat->tag >> 8) & 0xff,
-                (feat->tag >> 0) & 0xff,
-            };
+        if (!hb_feature_from_string((const char *)fc_feat, -1, feat))
+            continue;
 
-            size_t ofs = font->hb_feats_count * 6;
-            snprintf(&features[ofs], sizeof(features) - ofs,
-                     " %c%.4s", feat->value ? '+' : '-', tag);
+        const char tag[4] = {
+            (feat->tag >> 24) & 0xff,
+            (feat->tag >> 16) & 0xff,
+            (feat->tag >> 8) & 0xff,
+            (feat->tag >> 0) & 0xff,
+        };
 
-            LOG_DBG("feature: %.4s=%s", tag, feat->value ? "on" : "off");
-            font->hb_feats_count++;
-        }
+        size_t ofs = font->hb_feats_count * 6;
+        snprintf(&features[ofs], sizeof(features) - ofs,
+                 " %c%.4s", feat->value ? '+' : '-', tag);
+
+        LOG_DBG("feature: %.4s=%s", tag, feat->value ? "on" : "off");
+        font->hb_feats_count++;
     }
 #endif
 
