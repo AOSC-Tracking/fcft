@@ -45,6 +45,14 @@
 ### Deprecated
 ### Removed
 ### Fixed
+
+* Infinite loop on certain invalid `fontfeatures` values
+  ([#1554][foot-1554], [#1556][foot-1556]).
+
+[foot-1554]: https://codeberg.org/dnkl/foot/issues/1554
+[foot-1556]: https://codeberg.org/dnkl/foot/issues/1556
+
+
 ### Security
 ### Contributors
 
