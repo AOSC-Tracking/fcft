@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [3.1.7](#3-1-7)
 * [3.1.6][#3-1-6]
 * [3.1.5](#3-1-5)
 * [3.1.4](#3-1-4)
@@ -39,11 +39,8 @@
 * [1.1.7](#1-1-7)
 
 
-## Unreleased
-### Added
-### Changed
-### Deprecated
-### Removed
+## 3.1.7
+
 ### Fixed
 
 * Infinite loop on certain invalid `fontfeatures` values
@@ -51,10 +48,6 @@
 
 [foot-1554]: https://codeberg.org/dnkl/foot/issues/1554
 [foot-1556]: https://codeberg.org/dnkl/foot/issues/1556
-
-
-### Security
-### Contributors
 
 
 ## 3.1.6
