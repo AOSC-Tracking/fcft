@@ -1,5 +1,6 @@
 # Changelog
 
+* [Unreleased](#unreleased)
 * [3.1.7](#3-1-7)
 * [3.1.6][#3-1-6]
 * [3.1.5](#3-1-5)
@@ -37,6 +38,24 @@
 * [2.1.0](#2-1-0)
 * [2.0.0](#2-0-0)
 * [1.1.7](#1-1-7)
+
+
+## Unreleased
+### Added
+### Changed
+
+* Set font size using `FT_Set_Char_Size()` instead of
+  `FT_Set_Pixel_Sizes()`, as it provides a more fine-grained
+  interface, resulting in a more exact font size ([#1621][foot-1621]).
+
+[foot-1621]: https://codeberg.org/dnkl/foot/issues/1621
+
+
+### Deprecated
+### Removed
+### Fixed
+### Security
+### Contributors
 
 
 ## 3.1.7

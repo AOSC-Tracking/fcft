@@ -592,9 +592,17 @@ instantiate_pattern(FcPattern *pattern, double req_pt_size, double req_px_size,
         return false;
     }
 
-    if ((ft_err = FT_Set_Pixel_Sizes(ft_face, 0, round(pixel_size))) != FT_Err_Ok) {
-        LOG_ERR("%s: failed to set character size: %s",
-                face_file, ft_error_string(ft_err));
+    /*
+     * Using FT_Set_Char_Size() instead of FT_Set_Pixel_Sizes() allows
+     * us to use "fractional" pixel values. This _does_ make a
+     * difference.
+     *
+     * Since FT_Set_Char_Size() expects a size in *points*, not
+     * pixels, we use a DPI of 72. This means a pixel have the same
+     * size as a point.
+     */
+    if ((ft_err = FT_Set_Char_Size(ft_face, pixel_size * 64., 0, 72, 72))) {
+        LOG_ERR("%s: failed to set character size: %s", face_file, ft_error_string(ft_err));
         goto err_done_face;
     }
 
@@ -837,8 +845,8 @@ instantiate_pattern(FcPattern *pattern, double req_pt_size, double req_px_size,
             font->metrics.height, font->metrics.ascent, font->metrics.descent,
             font->metrics.max_advance.x, features);
 #else
-    LOG_INFO("%s: size=%.2fpt/%dpx, dpi=%.2f%s",
-             font->path, size, (int)round(pixel_size), dpi, features);
+    LOG_INFO("%s: size=%.2fpt/%.2fpx, dpi=%.2f%s",
+             font->path, size, pixel_size, dpi, features);
 #endif
 
     return true;

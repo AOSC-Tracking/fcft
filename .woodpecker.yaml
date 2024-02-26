@@ -1,5 +1,5 @@
 steps:
-  setup:
+  - name: setup
     when:
       branch:
         - master
@@ -11,7 +11,7 @@ steps:
       - git clone https://codeberg.org/dnkl/tllist.git
       - cd ..
 
-  codespell:
+  - name: codespell
     when:
       branch:
         - master
@@ -25,12 +25,12 @@ steps:
       - pip install codespell
       - codespell README.md CHANGELOG.md *.c *.h fcft/*.h doc/*.scd
 
-  x64:
+  - name: x64
     when:
       branch:
         - master
         - releases/*
-    group: build
+    depends_on: [setup]
     image: alpine:latest
     commands:
       - apk update
@@ -66,12 +66,12 @@ steps:
       - ninja -v test
       - cd ../..
 
-  x86:
+  - name: x86
     when:
       branch:
         - master
         - releases/*
-    group: build
+    depends_on: [setup]
     image: i386/alpine:latest
     commands:
       - apk update
