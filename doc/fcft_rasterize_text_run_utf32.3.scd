@@ -1,4 +1,4 @@
-fcft_rasterize_text_run_utf32(3) "3.1.7" "fcft"
+fcft_rasterize_text_run_utf32(3) "3.1.8" "fcft"
 
 # NAME
 
