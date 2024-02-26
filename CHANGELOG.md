@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [3.1.8](#3-1-8)
 * [3.1.7](#3-1-7)
 * [3.1.6][#3-1-6]
 * [3.1.5](#3-1-5)
@@ -40,8 +40,8 @@
 * [1.1.7](#1-1-7)
 
 
-## Unreleased
-### Added
+## 3.1.8
+
 ### Changed
 
 * Set font size using `FT_Set_Char_Size()` instead of
@@ -49,13 +49,6 @@
   interface, resulting in a more exact font size ([#1621][foot-1621]).
 
 [foot-1621]: https://codeberg.org/dnkl/foot/issues/1621
-
-
-### Deprecated
-### Removed
-### Fixed
-### Security
-### Contributors
 
 
 ## 3.1.7
