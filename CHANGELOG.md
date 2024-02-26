@@ -43,6 +43,14 @@
 ## Unreleased
 ### Added
 ### Changed
+
+* Set font size using `FT_Set_Char_Size()` instead of
+  `FT_Set_Pixel_Sizes()`, as it provides a more fine-grained
+  interface, resulting in a more exact font size ([#1621][foot-1621]).
+
+[foot-1621]: https://codeberg.org/dnkl/foot/issues/1621
+
+
 ### Deprecated
 ### Removed
 ### Fixed
