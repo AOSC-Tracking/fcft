@@ -25,7 +25,7 @@
  #include <harfbuzz/hb-ft.h>
 #endif
 #if defined(FCFT_HAVE_UTF8PROC)
- #include <utf8proc.h>
+ #include <libutf8proc/utf8proc.h>
 #endif
 
 #include <tllist.h>
